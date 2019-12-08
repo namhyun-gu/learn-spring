@@ -17,7 +17,7 @@ class TodoController {
     @PostMapping
     fun add(@RequestParam title: String?, @RequestParam content: String?): ResponseEntity<Todo> {
         return if (title != null) {
-            val todo = Todo(null, title, content, System.currentTimeMillis(), System.currentTimeMillis())
+            val todo = Todo(null, title, content)
             repository.save(todo)
             ResponseEntity.ok(todo)
         } else {
@@ -38,7 +38,6 @@ class TodoController {
             if (content != null) {
                 todo.content = content
             }
-            todo.updatedAt = System.currentTimeMillis()
             repository.save(todo)
             ResponseEntity.ok(todo)
         } else {
